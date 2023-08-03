@@ -36,4 +36,8 @@ disadv is that if training contain only +ve then problem as model will learn +ve
 
 
 K-Fold Cross Validation-
+divide data in k blocks and in ith iteration use ith bloack as test and other as training
+build models for all and then combine the result
 
+stratified kfold is like divide the data into folds having all representation of classes
+so it is better than k fold mwthods
