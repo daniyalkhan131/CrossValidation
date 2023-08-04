@@ -1,7 +1,17 @@
-# CrossValidation
+#cross validation
 
 cross validation allows us to compare different ML methods and get a sense of how well
 they will work in practice
+we use cross validation because we need generalization of our model
+
+types of cross val methods-
+non-exhaustive tech
+	hold out
+	k fold
+	stratified k fold
+exhaustive tech(this involve learn and test on all possible ways to divide original data)
+	leave one out cross val
+	leave P out cross val
 
 but how we know that first 75% data for training and last 25% for testing is the best way
 to divide the data. or using middle one or last one
@@ -41,3 +51,20 @@ build models for all and then combine the result
 
 stratified kfold is like divide the data into folds having all representation of classes
 so it is better than k fold mwthods
+
+
+
+leave one out cross validation-
+in this first record or row is taken as test data and other for training then 2nd as test
+and remainig as training and so on and combine the full result after doing this for entire
+dataset, but we can work this if there are like 1000 rows but if 1 million then difficult
+when not to use this-
+dataset huge
+computational resource limited
+when have lot of parameters to test(like depth, estimators... in tress tech)
+
+disadv is low bias
+	and outdated, not used now
+
+
+
