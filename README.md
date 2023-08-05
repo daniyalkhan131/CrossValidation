@@ -68,36 +68,49 @@ disadv is low bias
 
 
 
- #load the ED attendance dataset
-ed_month = pd. read_csv('data/ed _mth_ts.csv', index_col='date', parse_dates=True)
-ed month.index.freq= 'MS'
-arrival_rate = ed_month ['arrivals ] / ed_month. index. days_in_month
-arrival_rate.shape
+time series cross validation-
+	1-rolling forecast origin
+here we keep on adding future prediction data to training data and every time predict
+next future data in time series dataset, when horizon is 1 then 1 future data to predict
+and when 2 then 2 data point to predict but our train data is increasing by one step only.
 
-Train test split
-[ J: SPLIT DATE = '2016-06-01'
-train = arrival_ rate. loc[arrival_rate.index < SPLIT_DATE]
-test = arrival_rate. loc[arrival_rate.index >= SPLIT_DATE]
-I
-[ J: train.shape
-[ 1: cv_sliding = sliding_window(train, window_size=24, horizon=12)
-cv_scores_1 = cross_validation_score(model=SNaive(period=12),
-train=train, cv=cv_sliding, metric=mean_absolute_error)
-pd. DataFrame (cv_scores_1). describe ()
-[ ]: cv_sliding = sliding_window(train, window_size=24, horizon=12)
-cv_scores_2 = cross_validation_score (model=Naivel (),
-train=train, cv=cv_sliding, metric=mean absolute_error)
-pd.DataFrame (cv_scores_2) . describe ()
+Train:	[2502, 2414, 2800, 2143]
+Val:	[2708]
+-----------------
+CV[2]
+Train:	[2502, 2414, 2800, 2143, 2708]
+Val:	[1900]
+-----------------
+CV[3]
+Train:	[2502, 2414, 2800, 2143, 2708, 1900]
+Val:	[2333]
+-----------------
+CV[4]
+Train:	[2502, 2414, 2800, 2143, 2708, 1900, 2333]
+Val:	[2222]
 
-ax = pd. DataFrame (cv_scores_1).plot( figsize= (12,4))
-pd.Dataframe (cv_scores_ 2).plot (ax=ax)
-ax. legend ( ['SNaive',
-'Naivel'1)
+	2-sliding window approach
+in this there is a fix window size like when we add next future prediction data to our
+train data then we also keep on removing older data from train set
 
-model = SNaive (period=12)
-model.fit(train)
-preds = model.predict (horizon=12)
+CV[1]
+Train:	[2502, 2414, 2800, 2143]
+Val:	[2708]
+-----------------
+CV[2]
+Train:	[2414, 2800, 2143, 2708]
+Val:	[1900]
+-----------------
+CV[3]
+Train:	[2800, 2143, 2708, 1900]
+Val:	[2333]
+-----------------
+CV[4]
+Train:	[2143, 2708, 1900, 2333]
+Val:	[2222]
+-----------------
 
-mean _absolute.
-_error (test,
-preds)
+learn about time series data analysis then do dive into this because predictive time 
+series data is actually different then simply applying ML models
+doing cross validation is easier as above two techs are applied but for time series data
+we use different ML models as it is complex with time
