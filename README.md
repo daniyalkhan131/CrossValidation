@@ -68,3 +68,36 @@ disadv is low bias
 
 
 
+ #load the ED attendance dataset
+ed_month = pd. read_csv('data/ed _mth_ts.csv', index_col='date', parse_dates=True)
+ed month.index.freq= 'MS'
+arrival_rate = ed_month ['arrivals ] / ed_month. index. days_in_month
+arrival_rate.shape
+
+Train test split
+[ J: SPLIT DATE = '2016-06-01'
+train = arrival_ rate. loc[arrival_rate.index < SPLIT_DATE]
+test = arrival_rate. loc[arrival_rate.index >= SPLIT_DATE]
+I
+[ J: train.shape
+[ 1: cv_sliding = sliding_window(train, window_size=24, horizon=12)
+cv_scores_1 = cross_validation_score(model=SNaive(period=12),
+train=train, cv=cv_sliding, metric=mean_absolute_error)
+pd. DataFrame (cv_scores_1). describe ()
+[ ]: cv_sliding = sliding_window(train, window_size=24, horizon=12)
+cv_scores_2 = cross_validation_score (model=Naivel (),
+train=train, cv=cv_sliding, metric=mean absolute_error)
+pd.DataFrame (cv_scores_2) . describe ()
+
+ax = pd. DataFrame (cv_scores_1).plot( figsize= (12,4))
+pd.Dataframe (cv_scores_ 2).plot (ax=ax)
+ax. legend ( ['SNaive',
+'Naivel'1)
+
+model = SNaive (period=12)
+model.fit(train)
+preds = model.predict (horizon=12)
+
+mean _absolute.
+_error (test,
+preds)
